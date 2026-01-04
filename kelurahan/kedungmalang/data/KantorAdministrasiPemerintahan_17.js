@@ -1,0 +1,1 @@
+var json_KantorAdministrasiPemerintahan_17 = {"type":"FeatureCollection","name":"KantorAdministrasiPemerintahan_17","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"Nama":"Balai Desa Kedung Malang"},"geometry":{"type":"Point","coordinates":[109.251047452051452,-7.39080386880859]}}]}

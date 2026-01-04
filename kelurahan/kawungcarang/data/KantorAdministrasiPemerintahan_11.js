@@ -1,0 +1,1 @@
+var json_KantorAdministrasiPemerintahan_11 = {"type":"FeatureCollection","name":"KantorAdministrasiPemerintahan_11","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"Nama":"Kantor Kepala Desa Kawung Carang"},"geometry":{"type":"Point","coordinates":[109.25578953801157,-7.383063768588665]}}]}

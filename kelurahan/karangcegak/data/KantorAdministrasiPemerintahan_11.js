@@ -1,0 +1,1 @@
+var json_KantorAdministrasiPemerintahan_11 = {"type":"FeatureCollection","name":"KantorAdministrasiPemerintahan_11","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"Nama":"Balai Desai Karangcegak"},"geometry":{"type":"Point","coordinates":[109.282057479125214,-7.388551712690952]}}]}

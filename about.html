@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="titleicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="titleicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="titleicon/favicon-16x16.png">
+    <link rel="manifest" href="titleicon/site.webmanifest">
+    <title>Tentang Pengembangan Peta Kecamatan Sumbang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rimba-tua': '#166534', // Hijau Tua Kustom
+                        'rimba-muda': '#4ADE80', // Hijau Muda Kustom
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900" onload="AOS.init();">
+    <header class="bg-rimba-tua shadow-lg sticky top-0 z-[1100]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <a href="index.html" class="text-2xl font-bold tracking-wider !text-white">
+                Kecamatan Sumbang
+            </a>
+
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Beranda</a>
+                
+                <div class="relative group">
+                    <button class="flex items-center gap-1 !text-white hover:text-rimba-muda font-medium transition duration-150 focus:outline-none">
+                        Peta Desa
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-xl py-2 hidden group-hover:block border-t-4 border-rimba-muda">
+                        <a href="/kelurahan/datar/datar.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-rimba-tua">Desa Datar</a>
+                        <a href="/kelurahan/karangcegak/karangcegak.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-rimba-tua">Desa Karang Cegak</a>
+                        <a href="/kelurahan/kawungcarang/kawungcarang.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-rimba-tua">Desa Kawung Carang</a>
+                        <a href="/kelurahan/kedungmalang/kedungmalang.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-rimba-tua">Desa Kedung Malang</a>
+                    </div>
+                </div>
+
+                <a href="sumbang.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Peta Kecamatan</a>
+                <a href="about.html" class="!text-white hover:text-rimba-muda font-medium transition duration-150">Tentang Kami</a>
+            </nav>
+
+            <button id="menu-toggle" class="md:hidden text-white focus:outline-none p-2 rounded-md hover:bg-green-800 transition">
+                <svg id="burger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-rimba-tua border-t border-green-800 shadow-2xl">
+        <div class="px-4 pt-2 pb-6 space-y-1">
+            <a href="index.html" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-green-700">Beranda</a>
+            
+            <div class="space-y-1">
+                <button id="mobile-peta-toggle" class="w-full flex justify-between items-center px-3 py-3 rounded-md text-base font-medium text-white hover:bg-green-700 focus:outline-none">
+                    Peta Desa
+                    <svg id="peta-arrow" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="mobile-peta-submenu" class="hidden pl-6 space-y-1 bg-green-900/50 rounded-lg py-2">
+                    <a href="/kelurahan/datar/datar.html" class="block px-3 py-2 text-sm font-medium text-gray-200 hover:text-white border-l border-green-700">Desa Datar</a>
+                    <a href="/kelurahan/karangcegak/karangcegak.html" class="block px-3 py-2 text-sm font-medium text-gray-200 hover:text-white border-l border-green-700">Desa Karang Cegak</a>
+                    <a href="/kelurahan/kawungcarang/kawungcarang.html" class="block px-3 py-2 text-sm font-medium text-gray-200 hover:text-white border-l border-green-700">Desa Kawung Carang</a>
+                    <a href="/kelurahan/kedungmalang/kedungmalang.html" class="block px-3 py-2 text-sm font-medium text-gray-200 hover:text-white border-l border-green-700">Desa Kedung Malang</a>
+                </div>
+            </div>
+
+            <a href="sumbang.html" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-green-700">Peta Kecamatan</a>
+            <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-green-700">Tentang Kami</a>
+        </div>
+    </div>
+</header>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Kontrol Menu Burger Utama
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const burgerIcon = document.getElementById('burger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    menuToggle.addEventListener('click', function() {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        
+        // Ganti ikon burger ke X
+        if (isHidden) {
+            burgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        } else {
+            burgerIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+        }
+    });
+
+    // Kontrol Sub-menu Peta Desa di Mobile
+    const mobilePetaToggle = document.getElementById('mobile-peta-toggle');
+    const mobileSubmenu = document.getElementById('mobile-peta-submenu');
+    const petaArrow = document.getElementById('peta-arrow');
+
+    mobilePetaToggle.addEventListener('click', function() {
+        const isSubHidden = mobileSubmenu.classList.toggle('hidden');
+        
+        // Putar panah saat dibuka
+        if (isSubHidden) {
+            petaArrow.style.transform = 'rotate(0deg)';
+        } else {
+            petaArrow.style.transform = 'rotate(180deg)';
+        }
+    });
+
+    // Tutup menu jika user mengklik link apa saja di dalam mobile menu
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            burgerIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        });
+    });
+});
+</script>
+    <main class="max-w-4xl mx-auto pt-10 pb-20 px-4 sm:px-6 lg:px-8">
+        <header class="text-center mb-12" data-aos="fade-down">
+            <h1 class="text-5xl font-extrabold text-rimba-tua mb-3">Tentang Proyek Peta Kecamatan</h1>
+            <p class="text-xl text-gray-600">Transparansi data melalui visualisasi spasial modern.</p>
+        </header>
+
+        <section class="mb-12 p-8 bg-white rounded-xl shadow-lg border-l-8 border-rimba-tua" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-rimba-tua mb-4">Visi & Misi Kami</h2>
+            <p class="text-gray-700 mb-4">
+                Visi kami adalah menciptakan ekosistem data kecamatan yang terintegrasi, transparan, dan mudah diakses oleh seluruh warga dan pemangku kepentingan.
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                <li>Menyediakan peta infrastruktur dan potensi alam desa secara *real-time*.</li>
+                <li>Mendukung pengambilan keputusan berbasis data spasial.</li>
+                <li>Mempromosikan potensi wisata dan pertanian desa kepada dunia luar.</li>
+            </ul>
+        </section>
+
+        <section class="mb-12" data-aos="fade-right">
+            <h2 class="text-3xl font-bold text-rimba-tua mb-6 text-center">Tim Pengembang</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border border-green-200">
+                    <img src="images/profile-pict.png" alt="Profile Pict" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-rimba-muda">
+                    <h4 class="font-bold text-rimba-tua">Firli Firmansyah A.</h4>
+                    <p class="text-sm text-gray-600">Pengembang GIS</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border border-green-200">
+                    <img src="images/profile-pict.png" alt="Profile Pict" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-rimba-muda">
+                    <h4 class="font-bold text-rimba-tua">Firli Firmansyah A.</h4>
+                    <p class="text-sm text-gray-600">Pengembang Halaman Web</p>
+                </div>
+                <div class="bg-green-50 p-6 rounded-xl shadow-md border border-green-200">
+                    <img src="images/profile-pict.png" alt="Profile Pict" class="w-20 h-20 rounded-full mx-auto mb-3 object-cover border-4 border-rimba-muda">
+                    <h4 class="font-bold text-rimba-tua">Firli Firmansyah A.</h4>
+                    <p class="text-sm text-gray-600">Kontributor Data Lapangan</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 p-8 bg-green-50 rounded-xl shadow-inner border border-green-300" data-aos="fade-left">
+            <h2 class="text-3xl font-bold text-rimba-tua mb-4">Teknologi yang Digunakan</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <p class="font-semibold text-gray-800">Pemetaan Dasar (GIS):</p>
+                <p class="text-gray-700">QGIS (Eksport QGIS2WEB)</p>
+
+                <p class="font-semibold text-gray-800">Basis Peta Interaktif:</p>
+                <p class="text-gray-700">Leaflet.js</p>
+
+                <p class="font-semibold text-gray-800">Desain Antarmuka:</p>
+                <p class="text-gray-700">HTML5, Tailwind CSS (Play CDN)</p>
+
+                <p class="font-semibold text-gray-800">Agen AI:</p>
+                <p class="text-gray-700">Google Gemini</p>
+
+                <p class="font-semibold text-gray-800">Animasi & Interaktivitas:</p>
+                <p class="text-gray-700">AOS (Animate On Scroll) & Custom JS</p>
+            </div>
+        </section>
+
+    </main>
+    <footer class="bg-rimba-tua mt-10">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-white">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Tentang Kecamatan</h4>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Sejarah</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Potensi Alam</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Galeri</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Bantuan</h4>
+                    <ul class="space-y-2 text-sm text-green-200">
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">FAQ Peta</a></li>
+                        <li><a href="#" class="hover:text-rimba-muda !text-white">Cara Penggunaan</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2">
+                    <h4 class="text-lg font-semibold mb-3">Sumber Data Peta</h4>
+                    <p class="text-sm text-green-200">
+                        Data diambil dari survei mandiri desa dan diolah oleh Tim IT Kecamatan. Base map menggunakan OpenStreetMap.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-green-700 text-center">
+                <p class="text-sm text-green-200">&copy; 2025 Kecamatan Sumbang. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1 @@
+var json_Pendidikan_7 = {"type":"FeatureCollection","name":"Pendidikan_7","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"Nama":"TPQ Masjid Fauziyah","Jenjang":"TPQ"},"geometry":{"type":"Point","coordinates":[109.257599629753813,-7.371794335961697]}}]}
