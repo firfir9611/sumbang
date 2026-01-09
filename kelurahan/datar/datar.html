@@ -1385,6 +1385,33 @@ layer_BatasWilayahKelurahanDesa_2.eachLayer(function(layer) {
     addLabel(layer, i);
     i++;
 });
+
+var i = 0;
+layer_KantorAdministrasiPemerintahan_12.eachLayer(function(layer) {
+    var context = {
+        feature: layer.feature,
+        variables: {}
+    };
+
+    // Style Konten Label (Menggunakan font Inter/Sans yang lebih modern)
+    var labelContent = (layer.feature.properties['Nama'] !== null) 
+        ? '<div class="tracking-wider">' + layer.feature.properties['Nama'] + '</div>' 
+        : '';
+
+    // Bind Tooltip dengan Class Baru
+    layer.bindTooltip(labelContent, {
+        permanent: true, 
+        offset: [10, 0], 
+        direction: 'right', // Agar teks tepat di tengah poligon desa
+        className: 'label-desa-modern css_BatasWilayahKelurahanDesa_3' 
+    });
+
+    labels.push(layer);
+    totalMarkers += 1;
+    layer.added = true;
+    addLabel(layer, i);
+    i++;
+});
         resetLabels([layer_BatasWilayahKelurahanDesa_2]);
         map.on("zoomend", function(){
             resetLabels([layer_BatasWilayahKelurahanDesa_2]);
@@ -1662,12 +1689,13 @@ function zoomToAndMark(layer) {
 // 1. Definisikan fungsi pengecekan
 function updateLayerVisibility() {
     var currentZoom = map.getZoom();
-    var zoomThreshold = 17;
+    
 
     // Mapping antara Nama di Sidebar (Key) dan Variabel Layer (Value)
     const layersToWatch = {
         "detail": {
-            threshold: zoomThreshold,
+            min: 16,
+            max: 18,
             items: {
                 "Fasilitas Kesehatan": layer_Faskes_11,
                 "Fasilitas Pendidikan": layer_Pendidikan_7,
@@ -1684,14 +1712,16 @@ function updateLayerVisibility() {
             }
         },
         "middle": {
-            threshold: 14,
+            min: 16,
+            max: 25,
             items: {
                 // "Jalan Kecamatan": layer_JalanKecamatan_17,
                 "Kantor Administrasi Pemerintahan": layer_KantorAdministrasiPemerintahan_12
             }
         },
         "out": {
-            threshold: 12,
+            min: 12,
+            max: 19,
             items: {
                 "Batas Desa": layer_BatasWilayahKelurahanDesa_2
             }
@@ -1700,28 +1730,25 @@ function updateLayerVisibility() {
 
     // Fungsi tunggal untuk memproses logika Map dan Sidebar
     function syncMapAndSidebar(group) {
+        // Logika pengecekan rentang zoom
+        var isVisible = currentZoom >= group.min && currentZoom <= group.max;
+
         for (let name in group.items) {
             let lyr = group.items[name];
             let checkbox = document.querySelector(`input[data-layer-name="${name}"]`);
             
-            if (currentZoom >= group.threshold) {
-                // Tambahkan ke peta jika belum ada
+            if (isVisible) {
                 if (!map.hasLayer(lyr)) map.addLayer(lyr);
-                // Centang checkbox jika ada
                 if (checkbox) checkbox.checked = true;
             } else {
-                // Hapus dari peta jika ada
                 if (map.hasLayer(lyr)) map.removeLayer(lyr);
-                // Hilangkan centang jika ada
                 if (checkbox) checkbox.checked = false;
             }
         }
     }
 
-    // Jalankan untuk setiap grup sesuai urutan
-    syncMapAndSidebar(layersToWatch.out);
-    syncMapAndSidebar(layersToWatch.middle);
-    syncMapAndSidebar(layersToWatch.detail);
+    // Jalankan untuk setiap grup
+    Object.values(layersToWatch).forEach(syncMapAndSidebar);
 }
 
 map.fire('zoomend');
